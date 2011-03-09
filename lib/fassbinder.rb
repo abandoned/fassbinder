@@ -1,9 +1,7 @@
 require 'kosher'
 require 'sucker'
 
-require 'fassbinder/algorithm'
 require 'fassbinder/errors'
-require 'fassbinder/book'
-require 'fassbinder/offer'
+require 'fassbinder/item'
 require 'fassbinder/request'
-require 'fassbinder/seller'
+require 'fassbinder/response_wrapper'

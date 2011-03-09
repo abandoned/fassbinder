@@ -1,7 +1,6 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'rspec'
-require 'fabrication'
 
 require File.expand_path('../../lib/fassbinder', __FILE__)
 

@@ -16,7 +16,7 @@ module Fassbinder
     end
 
     def get
-      Algorithm.new(super)
+      ResponseWrapper.new(super, locale)
     end
   end
 end

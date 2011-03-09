@@ -1,0 +1,7 @@
+pkg/*
+*.gem
+.bundle
+.rvmrc
+.rspec
+Gemfile.lock
+amazon.yml

@@ -1,14 +1,5 @@
-module Kosher
-  class Offer < Struct.new(
-    :seller,
-    :condition,
-    :description,
-    :ships_in,
-    :ships_free,
-    :cents,
-    :exchange_id,
-    :listing_id)
-
+module Fassbinder
+  class Offer < Kosher::Offer
     def self.build(doc)
       offer             = new
       offer.seller      = Seller.build(doc['Merchant'])
@@ -25,14 +16,6 @@ module Kosher
       offer.listing_id  = listing['OfferListingId']
 
       offer
-    end
-
-    def kosher?
-      condition.kosher? && seller.kosher? && description.kosher? && ships_now?
-    end
-
-    def ships_now?
-      ships_in.to_i <= 48
     end
   end
 end

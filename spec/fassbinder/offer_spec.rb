@@ -1,14 +1,10 @@
 require 'spec_helper'
 
-module Kosher
+module Fassbinder
   describe Offer do
-    let(:offer) { Fabricate(:offer) }
+    use_vcr_cassette '0143105825'
 
     describe ".build" do
-      use_vcr_cassette '0143105825'
-
-      let(:asin) { '0143105825' }
-
       let(:doc) do
         request = Request.new(credentials)
         request.locale = :us

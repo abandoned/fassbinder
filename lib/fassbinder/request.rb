@@ -16,7 +16,7 @@ module Fassbinder
     end
 
     def get
-      ResponseWrapper.new(super, locale)
+      Response.new(super, locale)
     end
   end
 end

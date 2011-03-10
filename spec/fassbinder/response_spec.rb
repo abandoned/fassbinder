@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module Fassbinder
-  describe ResponseWrapper do
+  describe Response do
     use_vcr_cassette 'batch-request'
 
     let(:asins) do
@@ -13,7 +13,7 @@ module Fassbinder
         1844674282 0745640974 0745646441 0826489540 2081232191 }
     end
 
-    let(:response_wrapper) do
+    let(:response) do
       request = Request.new(credentials)
       request.locale = :us
       request.batchify(asins)
@@ -26,22 +26,23 @@ module Fassbinder
         response.stub!(:valid?).and_return(false)
 
         expect do
-          ResponseWrapper.new(response, :us)
+          Response.new(response, :us)
         end.to raise_error InvalidResponseError
       end
     end
 
-    describe "#books" do
-      it "should return found books" do
-        response_wrapper.items.count.should eql 19
-        response_wrapper.items.first.should be_a Item
+    describe "#snapshots" do
+      it "should return snapshots" do
+        debugger
+        response.snapshots.count.should eql 19
+        response.snapshots.first.should be_a Kosher::Snapshot
       end
     end
 
     describe "#errors" do
       it "should return ASINs that are not found" do
-        response_wrapper.errors.count.should eql 1
-        response_wrapper.errors.first.should eql '2081232191'
+        response.errors.count.should eql 1
+        response.errors.first.should eql '2081232191'
       end
     end
   end

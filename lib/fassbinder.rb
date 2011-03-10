@@ -1,7 +1,9 @@
 require 'kosher'
 require 'sucker'
 
-require 'fassbinder/errors'
-require 'fassbinder/item'
 require 'fassbinder/request'
-require 'fassbinder/response_wrapper'
+require 'fassbinder/response'
+
+module Fassbinder
+  class InvalidResponseError < StandardError; end
+end

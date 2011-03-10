@@ -12,6 +12,7 @@ module Fassbinder
     def snapshots
       @response.map('Item') do |doc|
         Kosher::Snapshot.new(
+          'amazon.' + Sucker::Request::HOSTS[@locale].match(/[^.]+$/).to_s,
           nil,
           doc['ASIN'],
           doc['SalesRank'].to_i,

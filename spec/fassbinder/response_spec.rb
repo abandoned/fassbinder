@@ -33,7 +33,6 @@ module Fassbinder
 
     describe "#snapshots" do
       it "should return snapshots" do
-        debugger
         response.snapshots.count.should eql 19
         response.snapshots.first.should be_a Kosher::Snapshot
       end

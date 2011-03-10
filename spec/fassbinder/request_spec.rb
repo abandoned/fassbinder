@@ -35,7 +35,7 @@ module Fassbinder
         request.locale = :us
         request.batchify('foo')
 
-        request.get.should be_a ResponseWrapper
+        request.get.should be_a Response
       end
     end
   end

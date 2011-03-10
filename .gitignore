@@ -4,4 +4,4 @@ pkg/*
 .rvmrc
 .rspec
 Gemfile.lock
-amazon.yml
+*.yml

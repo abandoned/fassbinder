@@ -1,4 +1,4 @@
 Fassbinder
 ==========
 
-![Fassbinder](http://www.ejournal.at/artsite/fassbinder.jpg)
+![Fassbinder](https://github.com/papercavalier/fassbinder/raw/master/fassbinder.jpg)

@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ['lib']
 
-  s.add_dependency('kosher', '~> 0.2.14')
+  s.add_dependency('kosher', '~> 0.2.18')
   s.add_dependency('sucker', '~> 1.4.0')
   s.add_development_dependency('rspec', '~> 2.5.0')
   s.add_development_dependency('ruby-debug19', '~> 0.11.6')

@@ -4,6 +4,8 @@ module Fassbinder
   # be taken absolutely seriously.
   #
   class Response
+    include Enumerable
+
     def initialize(response, locale)
       raise InvalidResponseError unless response.valid?
 
@@ -13,16 +15,8 @@ module Fassbinder
 
     # Yields each snapshot to given block.
     #
-    def each
-      @response.each('Item') { |doc| yield parse(doc) }
-    end
-
-    # Returns an array of snapshots.
-    #
-    def to_a
-      @response.map('Item') do |doc|
-        parse(doc)
-      end
+    def each(&block)
+      @response.each('Item') { |doc| block.call(parse(doc)) }
     end
 
     def errors
@@ -34,7 +28,7 @@ module Fassbinder
     private
 
     def parse(doc)
-      Kosher::Snapshot.new(
+      Kosher::Book.new(
         'amazon.' + Sucker::Request::HOSTS[@locale].match(/[^.]+$/).to_s,
         nil,
         doc['ASIN'],

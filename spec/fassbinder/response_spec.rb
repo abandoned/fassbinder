@@ -32,11 +32,11 @@ module Fassbinder
     end
 
     describe "#to_a" do
-      it "returns an array of snapshots" do
-        snapshots = response.to_a
+      it "returns an array of books" do
+        books = response.to_a
 
-        snapshots.count.should eql 19
-        snapshots.first.should be_a Kosher::Snapshot
+        books.count.should eql 19
+        books.first.should be_a Kosher::Book
       end
     end
 

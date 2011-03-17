@@ -31,10 +31,12 @@ module Fassbinder
       end
     end
 
-    describe "#snapshots" do
-      it "should return snapshots" do
-        response.snapshots.count.should eql 19
-        response.snapshots.first.should be_a Kosher::Snapshot
+    describe "#to_a" do
+      it "returns an array of snapshots" do
+        snapshots = response.to_a
+
+        snapshots.count.should eql 19
+        snapshots.first.should be_a Kosher::Snapshot
       end
     end
 

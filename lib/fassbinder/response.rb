@@ -6,6 +6,13 @@ module Fassbinder
   class Response
     include Enumerable
 
+    DEFAULT_SHIPPING_CENTS = { :us => 399,
+                               :uk => 280,
+                               :de => 299,
+                               :ca => 649,
+                               :fr => 300,
+                               :jp => 25000 }
+
     def initialize(response, locale)
       raise InvalidResponseError unless response.valid?
 
@@ -56,16 +63,10 @@ module Fassbinder
             Kosher::Seller.new(doc['Merchant']['MerchantId'],
                                doc['Merchant']['Name'],
                                doc['Merchant']['AverageFeedbackRating'].to_f,
-                               Kosher::Location.new((doc['Merchant']['Location']['CountryCode'] rescue nil), (doc['Merchant']['Location']['StateCode'] rescue nil))),
+                               Kosher::Location.new((doc['Merchant']['Location']['CountryCode'] rescue nil),
+                                                    (doc['Merchant']['Location']['StateCode'] rescue nil))),
             Kosher::Shipping.new(doc['OfferListing']['IsEligibleForSuperSaverShipping'] == '1' ?
-                                   0 : (case @locale
-                                        when :us then 399
-                                        when :uk then 280
-                                        when :de then 299
-                                        when :ca then 649
-                                        when :fr then 300
-                                        when :jp then 25000
-                                        end),
+                                   0 : DEFAULT_SHIPPING_CENTS[@locale],
                                  doc['OfferListing']['Price']['CurrencyCode'],
                                  Kosher::Availability.new(doc['OfferListing']['AvailabilityAttributes']['MaximumHours'].to_i))
           )

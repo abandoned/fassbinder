@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.authors     = ['Paper Cavalier']
   s.email       = 'code@papercavalier.com'
   s.homepage    = 'https://rubygems.org/gems/fassbinder'
-  s.summary     = %q{Wraps Amazon in a loving embrace.}
-  s.description = %q{Fassbinder wraps Amazon in a loving embrace.}
+  s.summary     = %q{Crawls book offers on Amazon}
+  s.description = %q{Fassbinder crawls book offers on Amazon.}
 
   s.rubyforge_project = 'fassbinder'
 
@@ -19,10 +19,7 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ['lib']
 
-  s.add_dependency('kosher', '~> 0.2.18')
+  s.add_dependency('kosher', '~> 0.2.23')
   s.add_dependency('sucker', '~> 1.4.0')
-  s.add_development_dependency('rspec', '~> 2.5.0')
-  s.add_development_dependency('ruby-debug19', '~> 0.11.6')
-  s.add_development_dependency('vcr', '~> 1.7.0')
-  s.add_development_dependency('webmock', '~> 1.6.2')
+  s.add_dependency('thor', '~> 0.14.6')
 end

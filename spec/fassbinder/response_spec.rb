@@ -21,13 +21,20 @@ module Fassbinder
     end
 
     describe ".new" do
-      it "raises an error if response is not valid" do
-        response = mock('Response')
-        response.stub!(:valid?).and_return(false)
+      context "when response is not valid" do
+        it "raises an error" do
+          response = mock('Response')
+          response.stub!(:valid?).and_return(false)
+          response.stub!(:has_errors?).and_return(true)
+          response.stub!(:errors).and_return([{
+            'Code'    => 'AccountLimitExceeded',
+            'Message' => 'YOU FAIL'
+          }])
 
-        expect do
-          Response.new(response, :us)
-        end.to raise_error InvalidResponseError
+          expect do
+            Response.new(response, :us)
+          end.to raise_error InvalidResponse, 'YOU FAIL'
+        end
       end
     end
 

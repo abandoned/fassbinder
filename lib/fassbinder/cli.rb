@@ -5,18 +5,16 @@ require 'fassbinder'
 module Fassbinder
   class CLI < Thor
     desc 'all', 'Looks up all offers for an ASIN'
-    method_option :locale, :required => true, :aliases => '-l'
+    method_option :locale, :aliases => '-l', :default => :us
     def all(asin)
-      locale = options[:locale] || :us
-      lookup(asin, locale)
+      lookup(asin, options[:locale])
     end
     map 'a' => 'all'
 
     desc 'kosher', 'Looks up kosher offers for an ASIN'
-    method_option :locale, :required => true, :aliases => '-l'
+    method_option :locale, :aliases => '-l', :default => :us
     def kosher(asin)
-      locale = options[:locale] || :us
-      lookup(asin, locale, true)
+      lookup(asin, options[:locale], true)
     end
     map 'k' => 'kosher'
 

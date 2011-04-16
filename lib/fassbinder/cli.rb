@@ -42,6 +42,7 @@ module Fassbinder
         puts
       end
     end
+
     def credentials
       { 'key'    => ENV['AMAZON_KEY'],
         'secret' => ENV['AMAZON_SECRET'] }

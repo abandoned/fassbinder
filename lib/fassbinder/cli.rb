@@ -41,6 +41,8 @@ module Fassbinder
         pp offer
         puts
       end
+
+      puts "Nada" if offers.size == 0
     end
 
     def credentials

@@ -43,7 +43,7 @@ module Fassbinder
       host = Sucker::Request::HOSTS[@locale]
       builder.venue = "amazon.#{host.match(/[^.]+$/)}"
 
-      offers = [doc['Offers']['Offer']].flatten
+      offers = [doc['Offers']['Offer']].flatten.compact
       offers.each { |offer| builder.add_offer(offer) }
 
       builder.book

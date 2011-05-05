@@ -41,7 +41,7 @@ module Fassbinder
       builder.asin = doc['ASIN']
       builder.offers_total = doc['Offers']['TotalOffers']
       host = Sucker::Request::HOSTS[@locale]
-      builder.venue = "amazon.#{host.match(/[^.]+$/)}"
+      builder.venue = host.sub('ecs.amazonaws', 'amazon')
 
       offers = [doc['Offers']['Offer']].flatten.compact
       offers.each { |offer| builder.add_offer(offer) }

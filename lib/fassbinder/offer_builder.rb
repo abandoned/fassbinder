@@ -30,7 +30,10 @@ module Fassbinder
 
     def add_shipping(hash)
       builder = ShippingBuilder.new
-      builder.add_availability(hash['OfferListing']['AvailabilityAttributes']['MaximumHours'])
+      builder.add_availability(
+        hash['OfferListing']['AvailabilityAttributes']['MaximumHours'],
+        hash['OfferListing']['AvailabilityAttributes']['IsPreorder']
+      )
       is_free = (hash['OfferListing']['IsEligibleForSuperSaverShipping'] == '1')
       builder.calculate_price(is_free, @offer.venue, hash['OfferListing']['Price']['CurrencyCode'])
       @offer.shipping = builder.shipping

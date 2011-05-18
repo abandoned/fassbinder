@@ -13,9 +13,10 @@ module Fassbinder
       @shipping = Kosher::Shipping.new
     end
 
-    def add_availability(hours)
+    def add_availability(hours, preorder)
       availability = Kosher::Availability.new
       availability.hours = hours.to_i
+      availability.preorder = (preorder == "1" ? true : false)
       @shipping.availability = availability
     end
 

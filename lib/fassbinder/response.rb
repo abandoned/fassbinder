@@ -6,16 +6,7 @@ module Fassbinder
     include Enumerable
 
     def initialize(response, locale)
-      unless response.valid?
-        message =
-          if response.has_errors?
-            response.errors.first['Message']
-          else
-            response.code
-          end
-
-        raise InvalidResponse, message
-      end
+      raise InvalidResponse, response.body unless response.valid?
 
       @response = response
       @locale   = locale.to_sym

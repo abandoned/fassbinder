@@ -1,31 +1,26 @@
-require 'sucker'
+require 'typhoeus'
 require 'fassbinder/response'
+require 'fassbinder/marketplace'
 
 module Fassbinder
-  class Request < Sucker::Request
-    def initialize(args = {})
-      super
-      self.<<({
-        'Operation'                       => 'ItemLookup',
-        'ItemLookup.Shared.IdType'        => 'ASIN',
-        'ItemLookup.Shared.Condition'     => 'All',
-        'ItemLookup.Shared.MerchantId'    => 'All',
-        'ItemLookup.Shared.ResponseGroup' => ['OfferFull'] })
-    end
+  class Request
+    attr_reader :url, :country
 
-    def batchify(asins)
-      asins = [asins].flatten
-
-      if asins.size > 20
-        raise ArgumentError, 'You cannot add more than 20 ASINs to a batch'
-      end
-
-      self.<<({ 'ItemLookup.1.ItemId' => asins[0, 10] })
-      self.<<({ 'ItemLookup.2.ItemId' => asins[10, 10] }) if asins.size > 10
+    def initialize(country, asin)
+      @country = country
+      @uri     = Marketplace.uri_builder(@country, asin)
     end
 
     def get
-      Response.new(super, locale)
+      Response.new(build_request, @country)
     end
+
+   def build_request
+     Typhoeus::Request.get(@uri, params)
+   end
+
+   def params
+     { headers: { 'User-Agent' => "IE!" } }
+   end
   end
 end

@@ -19,7 +19,8 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ['lib']
 
+  s.add_dependency('nokogiri', '~> 1.5.5')
+  s.add_dependency('typhoeus', '~> 0.3.3')
   s.add_dependency('kosher', '~> 0.4.0')
-  s.add_dependency('sucker', '~> 1.6.0')
   s.add_dependency('thor',   '~> 0.14.6')
 end
